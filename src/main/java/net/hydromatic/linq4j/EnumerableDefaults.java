@@ -410,7 +410,10 @@ public abstract class EnumerableDefaults {
    * by Enumerable.)
    */
   public static <TSource> TSource first(Enumerable<TSource> enumerable) {
-    throw Extensions.todo();
+    Enumerator<TSource> e = enumerable.enumerator();
+    if (false == e.moveNext())
+      throw new UnsupportedOperationException();
+    return e.current();
   }
 
   /**
