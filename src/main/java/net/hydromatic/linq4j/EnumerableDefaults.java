@@ -99,7 +99,14 @@ public abstract class EnumerableDefaults {
    */
   public static <TSource> boolean any(Enumerable<TSource> enumerable,
       Predicate1<TSource> predicate) {
-    throw Extensions.todo();
+    
+    for (Enumerator<TSource> os = enumerable.enumerator(); os.moveNext();) {
+      TSource o = os.current();
+      if (predicate.apply(o))
+        return true;
+    }
+
+    return false;
   }
 
   /**
